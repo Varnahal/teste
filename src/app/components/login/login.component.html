@@ -1,0 +1,14 @@
+<form class="form-signin" [formGroup]="form" (ngSubmit)="submit()">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="number" class="form-control" formControlName="codigo" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Codigo do Usuário</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" formControlName="password" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Senha</label>
+    </div>
+    <button class="btn btn-primary w-100 py-2" [disabled]="!form.valid" type="submit">Log-In</button>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+  </form>   
