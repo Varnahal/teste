@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { timer } from 'rxjs';
+import { delay, delayWhen, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -10,25 +13,25 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit{
 
-  constructor(private userService:UserService, private authService:AuthService, private router:Router){}
+  constructor(private userService:UserService, private authService:AuthService, private router:Router,private cookieService: CookieService ){}
   nome!:String;
   infos!:any;
   token:any;
   ngOnInit(): void {
-    this.authService.getToken().subscribe((res:String|null)=>{
-      this.token =  res
-      if (!res) {
-        this.router.navigate(['']);
-      }
-    });
+      const token = this.authService.getToken()
+      this.userService.verificaLogado(token!).subscribe({
+        next:(v)=>{
+          this.infos = JSON.parse(JSON.stringify(v))
+          this.infos = JSON.parse(this.infos['data'])
+          this.nome = this.infos[0].fields.codigo
+          //console.log(v)
+        },
+        error:(e)=>{
+          this.userService.logged.emit(false)
+          this.router.navigate([''])
+        }
+      })
     
-      
+  }
 
-    this.userService.verificaLogado(this.token).subscribe((res)=>{
-      this.infos = JSON.parse(res.data)
-      this.nome = this.infos[0].fields.codigo
-    },err=>{
-      this.router.navigate([''])
-    })
-}
 }

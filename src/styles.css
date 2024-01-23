@@ -3,3 +3,6 @@
     display: flex!important;
     justify-content: center;
 }
+html{
+    overflow-x: hidden;
+}

@@ -1,0 +1,288 @@
+<!-- tabela com scroll -->
+<div class="conteiner_tabela">
+<label for="filtro">Filtro por Descrição:</label>
+<input class="" id="filtro" type="text">
+<div class="tabela-com-scroll">
+    <table id="tabela">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Unidade</th>
+            <th>Grupo</th>
+            <th>ICMS</th>
+            <th>Comissão</th>
+            <th>Custo Atual</th>
+            <th>% Atual</th>
+            <th>Preço Atual</th>
+            <th>Custo Antigo</th>
+            <th>% Antigo</th>
+            <th>Preço Antigo</th>
+            <th>Estoque Pista</th>
+            <th>Estoque Interno</th>
+            <th>Estoque Mínimo</th>
+            <th>Ajuste</th>
+            <th>ATIVO?</th>
+            <th>CFOP</th>
+            <th>Codigo ANP</th>
+            <th>Origem</th>
+            <th>CST ICMS</th>
+            <th>PER ICMS</th>
+            <th>CST PIS</th>
+            <th>PER PIS</th>
+            <th>CST COFINS</th>
+            <th>PER COFINS</th>
+            <th>CEST</th>
+            <th>NCM</th>
+        <!-- Adicione mais colunas conforme necessário -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="linhas" (click)="selecionaLinha($event)"  *ngFor="let produto of produtos">
+            <td>{{produto.ID_PRODUTO}}</td>
+            <td>{{produto.DESC_PRODUTO}}</td>
+            <td>{{produto.FK_ID_UNIDADE}}</td>
+            <td>{{produto.FK_ID_GRUPO}}</td>
+            <td>{{produto.ALIQUOTA}}</td>
+            <td>{{produto.COMISSAO}}</td>
+            <td>{{produto.CT_ATUAL}}</td>
+            <td>{{produto.PC_ATUAL}}</td>
+            <td>{{produto.VL_ATUAL}}</td>
+            <td>{{produto.CT_ANTIGO}}</td>
+            <td>{{produto.PC_ANTIGO}}</td>
+            <td>{{produto.VL_ANTIGO}}</td>
+            <td>{{produto.ESTOQUE_PISTA}}</td>
+            <td>{{produto.ESTOQUE_INTERNO}}</td>
+            <td>{{produto.ESTOQUE_MIN}}</td>
+            <td>{{produto.AJUSTE}}</td>
+            <td>{{produto.FL_ATIVO}}</td>
+            <td>{{produto.FK_ID_CFOP}}</td>
+            <td>{{produto.CODIGO_ANP}}</td>
+            <td>{{produto.FK_ID_ORIGEM}}</td>
+            <td>{{produto.FK_ID_ICMS}}</td>
+            <td>{{produto.PER_ICMS}}</td>
+            <td>{{produto.FK_ID_PIS}}</td>
+            <td>{{produto.PER_PIS}}</td>
+            <td>{{produto.FK_ID_COFINS}}</td>
+            <td>{{produto.PER_COFINS}}</td>
+            <td>{{produto.CEST}}</td>
+            <td>{{produto.NCM}}</td>
+
+        </tr>
+        <!-- Adicione mais linhas conforme necessário -->
+    </tbody>
+    </table>
+</div>
+</div>
+<div id="ActionButtons">
+    <span id="InserirButton" class="btn btn-success" >Inserir</span>
+    <span id="AlterarButton" class="btn btn-warning" >Alterar</span>
+    <span id="ExcluirButton" class="btn btn-danger" >Excluir</span>
+    <span id="Confirmar" class="btn btn-success">Confirmar</span>
+    <span id="Cancelar" class="btn btn-danger" onclick="alteraCancela()">Cancelar</span>
+</div>
+<div class="row g-3" id="conteinerInp"> 
+    <div class="row" id="">
+      <div class="col" id="">
+        <div>
+          <label for="codigo">Código:</label>
+          <input class="form-control dadosinp" name = "codigo" id="codigo" type="text" tabindex="1">
+        </div>
+
+        <div>
+          <label for="descricao">Descrição:</label>
+          <input class="form-control dadosinp" name = "descricao" id="descricao" type="text" tabindex="2">
+        </div>
+        
+        <div>
+          <label for="comissao">Comissão:</label>
+          <input class="form-control dadosinp dadosint" name = "comissao" id="comissao" type="text" tabindex="7">
+        </div>
+        
+        <div>
+          <label for="estoquemin">Estoque Mínimo:</label>
+          <input class="form-control dadosinp dadosint" name = "estoquemin" id="estoquemin" type="number" tabindex="8">
+        </div>
+        
+        
+      </div>
+
+      <div class="col" id="">
+        <div>
+          <label for="ncmsh">NCM/SH:</label>
+          <input class="form-control dadosinp dadosint" name = "ncmsh" id="ncmsh" type="number" tabindex="3">
+        </div>
+        
+        <div>
+          <label for="unidade">Unidade:</label>
+          <select class="form-control dadosinp" name="unidade" id="unidade" tabindex="4">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+        <div>
+          <label for="ativo">Ativo:</label>
+          <input class="dadosinp" name = "ativo" id="ativo" type="checkbox" tabindex="9">
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="cest">CEST:</label>
+          <input class="form-control dadosinp dadosint" name = "cest" id="cest" type="number" tabindex="5">
+        </div>
+        
+        <div>
+          <label for="grupo">Grupo:</label>
+          <select class="form-control dadosinp" name="grupo" id="grupo" tabindex="6">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row" id="separa">
+      
+    </div>
+
+    <div class="row" id="">
+      <div class="col" id="">
+        <div>
+          <label for="cfop">CFOP:</label>
+          <select class="form-control dadosinp" name="cfop" id="cfop" tabindex="10">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="canp">CANP:</label>
+          <input class="form-control dadosinp dadosint" name = "canp" id="canp" type="number" tabindex="11">
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="origem">ORIGEM:</label>
+          <select class="form-control dadosinp" name="origem" id="origem" tabindex="12">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="cst_icms">CST ICMS:</label>
+          <select class="form-control dadosinp" name="cst_icms" id="cst_icms" tabindex="13">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="pct_icms">%ICMS:</label>
+          <input class="form-control dadosinp dadosint" name = "pct_icms" id="pct_icms" type="text" tabindex="14">
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="cst_pis">CST PIS:</label>
+          <select class="form-control dadosinp" name="cst_pis" id="cst_pis" tabindex="15">
+            <option value="" selected disabled></option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="cofins">COFINS:</label>
+          <select class="form-control dadosinp" name="cofins" id="cofins" tabindex="16">
+            <option value="" selected disabled></option>
+              <option id="" value=""></option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="pct_pis">%PIS:</label>
+          <input class="form-control dadosinp dadosint" name = "pct_pis" id="pct_pis" type="text" tabindex="17">  
+        </div>
+        
+        <div>
+          <label for="pct_cofins">%COFINS:</label>
+          <input class="form-control dadosinp dadosint" name = "pct_cofins" id="pct_cofins" type="text" tabindex="18">
+        </div>
+      </div>
+
+    </div>
+    <div class="row" id="separa">
+
+    </div>
+    
+    <div class="row" id="">
+      <div class="col" id="">
+        <div>
+          <label for="custoAtual">Custo Atual:</label>
+          <input class="form-control dadosinp dadosint" name = "custoAtual" id="custoAtual" type="text" tabindex="19">
+        </div>
+        
+        <div>
+          <label for="pct_Atual">% Atual:</label>
+          <input class="form-control dadosinp dadosint" name = "pct_Atual" id="pct_Atual" type="text" tabindex="20">
+        </div>
+        
+        <div>
+          <label for="precoAtual">Preço Atual:</label>
+          <input class="form-control dadosinp dadosint" name = "precoAtual" id="precoAtual" type="text" tabindex="21">
+        </div>
+      </div>
+      <div id="divBtnPassa" class="col">
+        <button id="btnPassa" onclick="passarValores()" tabindex="22">></button>
+      </div>
+      <div class="col" id="">
+        <div>
+          <label for="CustoAnterior">Custo Anterior:</label>
+          <input class="form-control dadosinp dadosint" name = "CustoAnterior" id="CustoAnterior" type="text" tabindex="23">
+        </div>
+        
+        <div>
+          <label for="pct_Anterior">% Anterior:</label>
+          <input class="form-control dadosinp dadosint" name = "pct_Anterior" id="pct_Anterior" type="text" tabindex="24">
+        </div>
+        
+        <div>
+          <label for="precoAnterior">Preço Anterior:</label>
+          <input class="form-control dadosinp dadosint" name = "precoAnterior" id="precoAnterior" type="text" tabindex="25">
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="Estoque_pista">Estoque Pista:</label>
+          <input class="form-control dadosinp  dadosint" name = "Estoque_pista" id="Estoque_pista" type="number" tabindex="26">
+        </div>
+        
+        <div>
+          <label for="Estoque_interno">Estoque Interno:</label>
+          <input class="form-control dadosinp  dadosint" name = "Estoque_interno" id="Estoque_interno" type="number" tabindex="27">
+        </div>
+        
+        <div>
+          <label for="ajuste">Ajuste:</label> 
+          <input class="form-control dadosinp  dadosint" name = "ajuste" id="ajuste" type="text" tabindex="28">
+        </div>
+      </div>
+      
+      <div class="col" id="">
+        <div>
+          <label for="ean13">Cód Ean13:</label>
+          <input class="form-control dadosinp" id="ean13" type="number" tabindex="29">
+          <button onclick="adicionarNaTabela()">Adicionar</button>
+          <div id="tableEan13">
+            <table>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+    
+</div>

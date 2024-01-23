@@ -1,0 +1,96 @@
+.tabela-com-scroll {
+    resize: auto;
+    height: 250px;
+    width: 75%;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: solid black 2px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    width:100px;
+    padding: 8px;
+}
+thead tr{
+    cursor:default;
+}
+tr{
+    cursor:pointer;
+}
+tr:hover{
+    background-color: #e0e0e0;
+}
+.conteiner_tabela{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+table{
+    background: #ffffff;
+}
+.linha-selecionada {
+    background-color: rgb(165, 158, 252); /* Cor de fundo para indicar seleção */
+    color: rgb(255, 255, 255); /* Cor do texto para a linha selecionada */
+    cursor:default;
+}
+.linha-selecionada:hover {
+    background-color: rgb(111, 107, 173); /* Cor de fundo para indicar seleção */
+    color: rgb(255, 255, 255); /* Cor do texto para a linha selecionada */
+    cursor:default;
+}
+
+#conteinerInp{
+    width: 80%;
+    margin: auto;
+}
+#inputsConteiner{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+#inputGroup{
+    display: flex;
+    gap: 20px;
+}
+#inpbox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+#separa{
+    background-color: black;
+    width: 100%;
+    height: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#tableEan13{
+    height: 70px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+#ActionButtons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+#Confirmar,#Cancelar{
+    display: none;
+}
+footer{
+    margin-top: 20px;
+    height: 70px;
+    background-color: rgb(87, 87, 87);
+}

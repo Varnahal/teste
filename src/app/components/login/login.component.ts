@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
@@ -10,26 +10,29 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
+  constructor(
+    private userService:UserService,
+    private authService:AuthService,
+    private router:Router,
 
-  constructor(private userService:UserService, private authService:AuthService, private router:Router){}
+    ){}
 
   form = new FormGroup({
     codigo : new FormControl('',Validators.required),
     password : new FormControl('',Validators.required),
 })
-token:any;
+
 ngOnInit(): void {
-  this.authService.getToken().subscribe((res:String|null)=>{
-    this.token =  res
-  })
-  
-    if(this.authService.getToken()){
-      this.userService.verificaLogado(this.token).subscribe((res)=>{
-        this.router.navigate(['index'])
-      },err=>{
-        this.authService.removeToken()
-      })
+  // Verificar o estado de login antes de redirecionar
+  const token = this.authService.getToken()
+  this.userService.verificaLogado(token!).subscribe(
+    () => {
+      this.router.navigate(['index']);
+    },
+    (err) => {
+      console.log(err);
     }
+  );
 }
 
 
@@ -37,6 +40,7 @@ ngOnInit(): void {
     if (this.form.valid){
       this.userService.login(this.form.value).subscribe((res)=>{
         this.authService.storeToken(res.token)
+        this.userService.logged.emit(true)
         this.router.navigate(['index'])
       })
     }
