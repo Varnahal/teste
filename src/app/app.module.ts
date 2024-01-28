@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IndexComponent } from './components/index/index.component';
 import { NavComponent } from './components/nav/nav.component';
 import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/cadastro-produtos.component';
+import { CompraProdutosComponent } from './components/pages/compra-produtos/compra-produtos.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CadastroProdutosComponent } from './components/pages/cadastro-produtos/
     IndexComponent,
     NavComponent,
     CadastroProdutosComponent,
+    CompraProdutosComponent,
   ],
   imports: [
     BrowserModule,
