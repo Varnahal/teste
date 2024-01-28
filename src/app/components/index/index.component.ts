@@ -3,8 +3,6 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { timer } from 'rxjs';
-import { delay, delayWhen, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -24,7 +22,6 @@ export class IndexComponent implements OnInit{
           this.infos = JSON.parse(JSON.stringify(v))
           this.infos = JSON.parse(this.infos['data'])
           this.nome = this.infos[0].fields.codigo
-          //console.log(v)
         },
         error:(e)=>{
           this.userService.logged.emit(false)

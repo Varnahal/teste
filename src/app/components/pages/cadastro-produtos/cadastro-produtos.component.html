@@ -1,7 +1,7 @@
 <!-- tabela com scroll -->
 <div class="conteiner_tabela">
 <label for="filtro">Filtro por Descrição:</label>
-<input class="" id="filtro" type="text">
+<input class="" [(ngModel)]="searchTerm" (input)="filtrarLinhas()" id="filtro" type="text">
 <div class="tabela-com-scroll">
     <table id="tabela">
     <thead>
@@ -39,34 +39,34 @@
     </thead>
     <tbody>
         <tr class="linhas" (click)="selecionaLinha($event)"  *ngFor="let produto of produtos">
-            <td>{{produto.ID_PRODUTO}}</td>
-            <td>{{produto.DESC_PRODUTO}}</td>
-            <td>{{produto.FK_ID_UNIDADE}}</td>
-            <td>{{produto.FK_ID_GRUPO}}</td>
-            <td>{{produto.ALIQUOTA}}</td>
-            <td>{{produto.COMISSAO}}</td>
-            <td>{{produto.CT_ATUAL}}</td>
-            <td>{{produto.PC_ATUAL}}</td>
-            <td>{{produto.VL_ATUAL}}</td>
-            <td>{{produto.CT_ANTIGO}}</td>
-            <td>{{produto.PC_ANTIGO}}</td>
-            <td>{{produto.VL_ANTIGO}}</td>
-            <td>{{produto.ESTOQUE_PISTA}}</td>
-            <td>{{produto.ESTOQUE_INTERNO}}</td>
-            <td>{{produto.ESTOQUE_MIN}}</td>
-            <td>{{produto.AJUSTE}}</td>
-            <td>{{produto.FL_ATIVO}}</td>
-            <td>{{produto.FK_ID_CFOP}}</td>
-            <td>{{produto.CODIGO_ANP}}</td>
-            <td>{{produto.FK_ID_ORIGEM}}</td>
-            <td>{{produto.FK_ID_ICMS}}</td>
-            <td>{{produto.PER_ICMS}}</td>
-            <td>{{produto.FK_ID_PIS}}</td>
-            <td>{{produto.PER_PIS}}</td>
-            <td>{{produto.FK_ID_COFINS}}</td>
-            <td>{{produto.PER_COFINS}}</td>
-            <td>{{produto.CEST}}</td>
-            <td>{{produto.NCM}}</td>
+            <td class="codigo">{{produto.ID_PRODUTO}}</td>
+            <td class="desc">{{produto.DESC_PRODUTO}}</td>
+            <td class="unidade">{{produto.FK_ID_UNIDADE}}</td>
+            <td class="grupo">{{produto.FK_ID_GRUPO}}</td>
+            <td class="aliquota">{{produto.ALIQUOTA}}</td>
+            <td class="comissao">{{produto.COMISSAO}}</td>
+            <td class="cst_atual">{{produto.CT_ATUAL}}</td>
+            <td class="per_atual">{{produto.PC_ATUAL}}</td>
+            <td class="vl_atual">{{produto.VL_ATUAL}}</td>
+            <td class="cst_antigo">{{produto.CT_ANTIGO}}</td>
+            <td class="per_antigo">{{produto.PC_ANTIGO}}</td>
+            <td class="vl_antigo">{{produto.VL_ANTIGO}}</td>
+            <td class="estoque_pista">{{produto.ESTOQUE_PISTA}}</td>
+            <td class="estoque_interno">{{produto.ESTOQUE_INTERNO}}</td>
+            <td class="estoque_min">{{produto.ESTOQUE_MIN}}</td>
+            <td class="ajuste">{{produto.AJUSTE}}</td>
+            <td class="ativo">{{produto.FL_ATIVO}}</td>
+            <td class="cfop">{{produto.FK_ID_CFOP}}</td>
+            <td class="anp">{{produto.CODIGO_ANP}}</td>
+            <td class="origem">{{produto.FK_ID_ORIGEM}}</td>
+            <td class="icms">{{produto.FK_ID_ICMS}}</td>
+            <td class="per_icms">{{produto.PER_ICMS}}</td>
+            <td class="pis">{{produto.FK_ID_PIS}}</td>
+            <td class="per_pis">{{produto.PER_PIS}}</td>
+            <td class="cofins">{{produto.FK_ID_COFINS}}</td>
+            <td class="per_cofins">{{produto.PER_COFINS}}</td>
+            <td class="cest">{{produto.CEST}}</td>
+            <td class="ncm">{{produto.NCM}}</td>
 
         </tr>
         <!-- Adicione mais linhas conforme necessário -->
@@ -75,33 +75,33 @@
 </div>
 </div>
 <div id="ActionButtons">
-    <span id="InserirButton" class="btn btn-success" >Inserir</span>
-    <span id="AlterarButton" class="btn btn-warning" >Alterar</span>
-    <span id="ExcluirButton" class="btn btn-danger" >Excluir</span>
-    <span id="Confirmar" class="btn btn-success">Confirmar</span>
-    <span id="Cancelar" class="btn btn-danger" onclick="alteraCancela()">Cancelar</span>
+    <span id="InserirButton" class="btn btn-success" (click)="inserirProduto()" >Inserir</span>
+    <span id="AlterarButton" class="btn btn-warning" (click)="alterarInps()" >Alterar</span>
+    <span id="ExcluirButton" class="btn btn-danger" (click)="removerProduto()" >Excluir</span>
+    <span id="Confirmar" class="btn btn-success" (click)="alterarProduto()">Confirmar</span>
+    <span id="Cancelar" class="btn btn-danger" (click)="alteraCancela()">Cancelar</span>
 </div>
-<div class="row g-3" id="conteinerInp"> 
+<div [formGroup]="form" class="row g-3" id="conteinerInp"> 
     <div class="row" id="">
       <div class="col" id="">
         <div>
           <label for="codigo">Código:</label>
-          <input class="form-control dadosinp" name = "codigo" id="codigo" type="text" tabindex="1">
+          <input  formControlName="codigo" class="form-control dadosinp" name = "codigo" id="codigo" type="text" tabindex="1">
         </div>
 
         <div>
           <label for="descricao">Descrição:</label>
-          <input class="form-control dadosinp" name = "descricao" id="descricao" type="text" tabindex="2">
+          <input formControlName="descricao" class="form-control dadosinp" name = "descricao" id="descricao" type="text" tabindex="2">
         </div>
         
         <div>
           <label for="comissao">Comissão:</label>
-          <input class="form-control dadosinp dadosint" name = "comissao" id="comissao" type="text" tabindex="7">
+          <input formControlName="comissao" class="form-control dadosinp dadosint" name = "comissao" id="comissao" type="text" tabindex="7">
         </div>
         
         <div>
           <label for="estoquemin">Estoque Mínimo:</label>
-          <input class="form-control dadosinp dadosint" name = "estoquemin" id="estoquemin" type="number" tabindex="8">
+          <input formControlName="estoque_min" class="form-control dadosinp dadosint" name = "estoquemin" id="estoquemin" type="number" tabindex="8">
         </div>
         
         
@@ -110,30 +110,30 @@
       <div class="col" id="">
         <div>
           <label for="ncmsh">NCM/SH:</label>
-          <input class="form-control dadosinp dadosint" name = "ncmsh" id="ncmsh" type="number" tabindex="3">
+          <input formControlName="ncm_sh" class="form-control dadosinp dadosint" name = "ncmsh" id="ncmsh" type="number" tabindex="3">
         </div>
         
         <div>
           <label for="unidade">Unidade:</label>
-          <select class="form-control dadosinp" name="unidade" id="unidade" tabindex="4">
+          <select formControlName="unidade" class="form-control dadosinp" name="unidade" id="unidade" tabindex="4">
             <option value="" selected disabled></option>
           </select>
         </div>
         <div>
           <label for="ativo">Ativo:</label>
-          <input class="dadosinp" name = "ativo" id="ativo" type="checkbox" tabindex="9">
+          <input formControlName="ativo" class="dadosinp" name = "ativo" id="ativo" type="checkbox" tabindex="9">
         </div>
       </div>
       
       <div class="col" id="">
         <div>
           <label for="cest">CEST:</label>
-          <input class="form-control dadosinp dadosint" name = "cest" id="cest" type="number" tabindex="5">
+          <input formControlName="cest" class="form-control dadosinp dadosint" name = "cest" id="cest" type="number" tabindex="5">
         </div>
         
         <div>
           <label for="grupo">Grupo:</label>
-          <select class="form-control dadosinp" name="grupo" id="grupo" tabindex="6">
+          <select formControlName="grupo" class="form-control dadosinp" name="grupo" id="grupo" tabindex="6">
             <option value="" selected disabled></option>
           </select>
         </div>
@@ -148,49 +148,51 @@
       <div class="col" id="">
         <div>
           <label for="cfop">CFOP:</label>
-          <select class="form-control dadosinp" name="cfop" id="cfop" tabindex="10">
+          <select formControlName="cfop" class="form-control dadosinp" name="cfop" id="cfop" tabindex="10">
             <option value="" selected disabled></option>
+            <option value="1555" selected >1555-asas</option>
+            <option value="123" selected>123-adads</option>
           </select>
         </div>
         
         <div>
           <label for="canp">CANP:</label>
-          <input class="form-control dadosinp dadosint" name = "canp" id="canp" type="number" tabindex="11">
+          <input formControlName="canp" class="form-control dadosinp dadosint" name = "canp" id="canp" type="number" tabindex="11">
         </div>
       </div>
       
       <div class="col" id="">
         <div>
           <label for="origem">ORIGEM:</label>
-          <select class="form-control dadosinp" name="origem" id="origem" tabindex="12">
+          <select formControlName="origem" class="form-control dadosinp" name="origem" id="origem" tabindex="12">
             <option value="" selected disabled></option>
           </select>
         </div>
         
         <div>
           <label for="cst_icms">CST ICMS:</label>
-          <select class="form-control dadosinp" name="cst_icms" id="cst_icms" tabindex="13">
+          <select formControlName="cst_icms" class="form-control dadosinp" name="cst_icms" id="cst_icms" tabindex="13">
             <option value="" selected disabled></option>
           </select>
         </div>
         
         <div>
           <label for="pct_icms">%ICMS:</label>
-          <input class="form-control dadosinp dadosint" name = "pct_icms" id="pct_icms" type="text" tabindex="14">
+          <input formControlName="per_icms" class="form-control dadosinp dadosint" name = "pct_icms" id="pct_icms" type="text" tabindex="14">
         </div>
       </div>
       
       <div class="col" id="">
         <div>
           <label for="cst_pis">CST PIS:</label>
-          <select class="form-control dadosinp" name="cst_pis" id="cst_pis" tabindex="15">
+          <select formControlName="cst_pis" class="form-control dadosinp" name="cst_pis" id="cst_pis" tabindex="15">
             <option value="" selected disabled></option>
           </select>
         </div>
         
         <div>
           <label for="cofins">COFINS:</label>
-          <select class="form-control dadosinp" name="cofins" id="cofins" tabindex="16">
+          <select formControlName="cofins" class="form-control dadosinp" name="cofins" id="cofins" tabindex="16">
             <option value="" selected disabled></option>
               <option id="" value=""></option>
           </select>
@@ -200,12 +202,12 @@
       <div class="col" id="">
         <div>
           <label for="pct_pis">%PIS:</label>
-          <input class="form-control dadosinp dadosint" name = "pct_pis" id="pct_pis" type="text" tabindex="17">  
+          <input formControlName="per_pis" class="form-control dadosinp dadosint" name = "pct_pis" id="pct_pis" type="text" tabindex="17">  
         </div>
         
         <div>
           <label for="pct_cofins">%COFINS:</label>
-          <input class="form-control dadosinp dadosint" name = "pct_cofins" id="pct_cofins" type="text" tabindex="18">
+          <input formControlName="per_cofins" class="form-control dadosinp dadosint" name = "pct_cofins" id="pct_cofins" type="text" tabindex="18">
         </div>
       </div>
 
@@ -218,61 +220,61 @@
       <div class="col" id="">
         <div>
           <label for="custoAtual">Custo Atual:</label>
-          <input class="form-control dadosinp dadosint" name = "custoAtual" id="custoAtual" type="text" tabindex="19">
+          <input formControlName="cst_atual" class="form-control dadosinp dadosint" name = "custoAtual" id="custoAtual" type="text" tabindex="19">
         </div>
         
         <div>
           <label for="pct_Atual">% Atual:</label>
-          <input class="form-control dadosinp dadosint" name = "pct_Atual" id="pct_Atual" type="text" tabindex="20">
+          <input formControlName="per_atual" class="form-control dadosinp dadosint" name = "pct_Atual" id="pct_Atual" type="text" tabindex="20">
         </div>
         
         <div>
           <label for="precoAtual">Preço Atual:</label>
-          <input class="form-control dadosinp dadosint" name = "precoAtual" id="precoAtual" type="text" tabindex="21">
+          <input formControlName="preco_atual" class="form-control dadosinp dadosint" name = "precoAtual" id="precoAtual" type="text" tabindex="21">
         </div>
       </div>
       <div id="divBtnPassa" class="col">
-        <button id="btnPassa" onclick="passarValores()" tabindex="22">></button>
+        <button id="btnPassa" (click)="passarValores()" tabindex="22">></button>
       </div>
       <div class="col" id="">
         <div>
           <label for="CustoAnterior">Custo Anterior:</label>
-          <input class="form-control dadosinp dadosint" name = "CustoAnterior" id="CustoAnterior" type="text" tabindex="23">
+          <input formControlName="cst_antigo" class="form-control dadosinp dadosint" name = "CustoAnterior" id="CustoAnterior" type="text" tabindex="23">
         </div>
         
         <div>
           <label for="pct_Anterior">% Anterior:</label>
-          <input class="form-control dadosinp dadosint" name = "pct_Anterior" id="pct_Anterior" type="text" tabindex="24">
+          <input formControlName="per_antigo" class="form-control dadosinp dadosint" name = "pct_Anterior" id="pct_Anterior" type="text" tabindex="24">
         </div>
         
         <div>
           <label for="precoAnterior">Preço Anterior:</label>
-          <input class="form-control dadosinp dadosint" name = "precoAnterior" id="precoAnterior" type="text" tabindex="25">
+          <input formControlName="preco_antigo" class="form-control dadosinp dadosint" name = "precoAnterior" id="precoAnterior" type="text" tabindex="25">
         </div>
       </div>
       
       <div class="col" id="">
         <div>
           <label for="Estoque_pista">Estoque Pista:</label>
-          <input class="form-control dadosinp  dadosint" name = "Estoque_pista" id="Estoque_pista" type="number" tabindex="26">
+          <input formControlName="estoque_pista" class="form-control dadosinp  dadosint" name = "Estoque_pista" id="Estoque_pista" type="number" tabindex="26">
         </div>
         
         <div>
           <label for="Estoque_interno">Estoque Interno:</label>
-          <input class="form-control dadosinp  dadosint" name = "Estoque_interno" id="Estoque_interno" type="number" tabindex="27">
+          <input formControlName="estoque_interno" class="form-control dadosinp  dadosint" name = "Estoque_interno" id="Estoque_interno" type="number" tabindex="27">
         </div>
         
         <div>
           <label for="ajuste">Ajuste:</label> 
-          <input class="form-control dadosinp  dadosint" name = "ajuste" id="ajuste" type="text" tabindex="28">
+          <input formControlName="ajuste" class="form-control dadosinp  dadosint" name = "ajuste" id="ajuste" type="text" tabindex="28">
         </div>
       </div>
       
       <div class="col" id="">
         <div>
           <label for="ean13">Cód Ean13:</label>
-          <input class="form-control dadosinp" id="ean13" type="number" tabindex="29">
-          <button onclick="adicionarNaTabela()">Adicionar</button>
+          <input formControlName="ean13_input" class="form-control dadosinp" id="ean13" type="number" tabindex="29">
+          <button (click)="adicionarNaTabela($event)">Adicionar</button>
           <div id="tableEan13">
             <table>
               <tbody>

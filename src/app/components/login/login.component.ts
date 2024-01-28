@@ -28,9 +28,6 @@ ngOnInit(): void {
   this.userService.verificaLogado(token!).subscribe(
     () => {
       this.router.navigate(['index']);
-    },
-    (err) => {
-      console.log(err);
     }
   );
 }

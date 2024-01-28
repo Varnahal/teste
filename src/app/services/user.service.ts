@@ -4,15 +4,17 @@ import { Observable, of } from 'rxjs';
 import { catchError, delayWhen, map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { timer } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   logged = new EventEmitter<boolean>()
-  constructor(private http:HttpClient, private authService:AuthService,private cookieService: CookieService ) { }
+  constructor(
+    private http:HttpClient,
+    private authService:AuthService,
+    private cookieService: CookieService 
+  ) { }
 
   login(data:any):Observable<any>{
     return this.http.post('http://127.0.0.1:8000/api/login/',data)
@@ -32,17 +34,10 @@ export class UserService {
   }
 
   verificaLogado( token:string){
-    
     return this.http.get('http://127.0.0.1:8000/api/user/',{headers:{'Authorization':` Token ${token} `}})
   }
 
   trazerDados(cod:any,token:string):Observable<any>{
     return this.http.get(`http://127.0.0.1:8000/api/user/${cod}`,{headers:{'Authorization':` Token ${token}`}})
   }
-
-  produtos():Observable<any>{
-    const token = this.authService.getToken()
-    return this.http.get(`http://127.0.0.1:8000/api/produtos/register/`,{headers:{'Authorization':` Token ${token}`}})
-  }
-
 }
